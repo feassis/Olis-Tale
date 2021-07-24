@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec488c5ea8859154b940fdb1332e1b50, type: 3}
+  m_Name: Apple
+  m_EditorClassIdentifier: 
+  Name: Apple
+  Id: 0
+  UIDisplay: {fileID: 21300000, guid: 5d9ba4e7d0964044ea54abe409d81dfd, type: 3}
+  Type: 1
+  Weight: 0
+  IsStackable: 1
+  StackAmount: 20
+  Description: Known by inspiring the thoughts of gravity
+  RestoreHealthValue: 10
