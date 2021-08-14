@@ -57,6 +57,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""69e3ae0e-3f42-4831-bae3-1cc430d6b211"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -323,6 +331,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""HeavyAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f2c52e6-005e-4647-b6d9-4f9ba02f3bb2"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -390,6 +409,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_LightAttack = m_Player.FindAction("LightAttack", throwIfNotFound: true);
         m_Player_HeavyAttack = m_Player.FindAction("HeavyAttack", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         // Mouse
         m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
         m_Mouse_MouseLook = m_Mouse.FindAction("MouseLook", throwIfNotFound: true);
@@ -450,6 +470,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_LightAttack;
     private readonly InputAction m_Player_HeavyAttack;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -459,6 +480,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @LightAttack => m_Wrapper.m_Player_LightAttack;
         public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -483,6 +505,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @HeavyAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
                 @HeavyAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
                 @HeavyAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -502,6 +527,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @HeavyAttack.started += instance.OnHeavyAttack;
                 @HeavyAttack.performed += instance.OnHeavyAttack;
                 @HeavyAttack.canceled += instance.OnHeavyAttack;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -579,6 +607,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnLightAttack(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IMouseActions
     {

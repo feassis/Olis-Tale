@@ -9,7 +9,6 @@ using UnityEngine.Events;
 public abstract class UserInterfaceGraphics : MonoBehaviour
 {
     public InventoryObject Inventory;
-    public PlayerInventoryManager player;
 
     protected Vector2 prebapSizeDelta;
 

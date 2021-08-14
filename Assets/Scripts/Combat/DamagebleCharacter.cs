@@ -6,7 +6,7 @@ public class DamagebleCharacter : MonoBehaviour
 {
     public Animator Animator;
     public bool IsDead = false;
-    [SerializeField] private float maxHealth;
+    [SerializeField] protected float maxHealth;
     protected float currentHealth;
 
     private void Awake()

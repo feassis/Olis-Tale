@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerCharacter : DamagebleCharacter
 {
+    public MobSpawner MobSpawner;
     public override void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        PlayerManager.instance.HealthBar.value = currentHealth / maxHealth;
 
         if (currentHealth <= 0)
         {
@@ -15,6 +17,6 @@ public class PlayerCharacter : DamagebleCharacter
     }
     public override void Die()
     {
-        Debug.Log("Player Died");
+        PlayerManager.instance.GameOver.Open();
     }
 }

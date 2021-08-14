@@ -20,6 +20,10 @@ public class EnemyController : MonoBehaviour
 
     private bool isAttacking = false;
 
+    private Vector3 previousPosition;
+    private Vector3 wanderPosition;
+    private float curSpeed;
+
     private readonly string attack = "Attack";
     private readonly string idle = "IdleNormal";
 
@@ -27,6 +31,8 @@ public class EnemyController : MonoBehaviour
     {
         target = PlayerManager.instance.Player.transform;
         agent = GetComponent<NavMeshAgent>();
+        previousPosition = transform.position;
+        StartCoroutine(Wander());
     }
 
     // Update is called once per frame
@@ -46,6 +52,16 @@ public class EnemyController : MonoBehaviour
                 FaceTarget();
             }
         }
+        else if(!character.IsDead)
+        {
+            agent.SetDestination(wanderPosition);
+        }
+
+        Vector3 curMove = transform.position - previousPosition;
+        curSpeed = curMove.magnitude / Time.deltaTime;
+        previousPosition = transform.position;
+
+        animator.SetFloat("velocity", curSpeed);
     }
 
     private Collider[] GetPlayersInRange(Transform pointOfOrigin, float range)
@@ -102,5 +118,14 @@ public class EnemyController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, agent.stoppingDistance);
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+    private IEnumerator Wander()
+    {
+        while (true)
+        {
+            wanderPosition = new Vector3(transform.position.x + Random.Range(-15f, 15f), 0, transform.position.z + Random.Range(-15f, 15f)) ;
+            yield return new WaitForSeconds(2f);
+        }
     }
 }

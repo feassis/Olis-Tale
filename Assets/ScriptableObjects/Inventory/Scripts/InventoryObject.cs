@@ -206,7 +206,7 @@ public class InventorySlot
 
     public InventorySlot()
     {
-                Item = null;
+        Item = new Item();
         Amount = 0;
     }
 

@@ -20,6 +20,7 @@ public class InputManager : MonoBehaviour
         Controls.Player.LightAttack.performed += _ => playerCombat.LightAttack();
         Controls.Player.HeavyAttack.performed += _ => playerCombat.HeavyAttack();
         Controls.UI.Inventory.performed += _ => playerInventoryManager.ToggleInventoryInterface();
+        Controls.Player.Interact.performed += _ => playerInventoryManager.TryInteractWithSeller();
     }
 
     private void OnEnable()
